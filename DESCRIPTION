@@ -1,0 +1,17 @@
+Package: adobeTaRget
+Title: R Client for Adobe Target API V1.0
+Version: 0.0.0.9000
+Authors@R: person("Amanda", "Ludden", email = "aludden@dtcc.edu", role = c("aut", "cre"))
+Description: Functions for interacting with the Adobe Target API V1.0 (http://developers.adobetarget.com/api/)
+Depends: R (>= 3.4.3)
+Imports:
+  dplyr,
+  httr,
+  jsonlite,
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
