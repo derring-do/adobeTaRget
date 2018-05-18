@@ -17,6 +17,6 @@ listActivities <- function() {
   )
   
   activities <- content(r, "parsed", "application/json") 
-  activities <- lapply(activities$activities, data.frame, stringsAsFactors = FALSE) %>% bind_rows %>% arrange(desc(modifiedAt)) %>% slice(1:20)
+  activities <- lapply(activities$activities, data.frame, stringsAsFactors = FALSE) %>% bind_rows %>% arrange(desc(modifiedAt)) 
   return(activities)
 }
