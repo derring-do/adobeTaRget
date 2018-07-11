@@ -4,10 +4,12 @@
 \alias{getActivityChangelog}
 \title{getActivityChangelog}
 \usage{
-getActivityChangelog(activityId)
+getActivityChangelog(activityId, activities = "")
 }
 \arguments{
 \item{activityId}{(character) activityId returned by listActivities()}
+
+\item{activities}{output of listActivities}
 }
 \value{
 data.frame of a single activity's events
@@ -16,5 +18,5 @@ data.frame of a single activity's events
 getActivityChangelog
 }
 \examples{
-getActivityChangelog("123456")
+getActivityChangelog("123456"); if only one supplied, you get a list instead of df
 }

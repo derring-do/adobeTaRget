@@ -2,14 +2,21 @@
 % Please edit documentation in R/adobeTaRget.R
 \name{checkRenviron}
 \alias{checkRenviron}
-\title{INTERNAL: Check for requisite .Renviron variables; alert if missing}
+\title{Check for requisite .Renviron variables; alert if missing}
 \usage{
 checkRenviron(var)
 }
 \arguments{
 \item{var}{(character) name of variable}
+
+\item{var}{}
+}
+\value{
+Error message if .Renviron not set
 }
 \description{
-INTERNAL: Check for requisite .Renviron variables; alert if missing
+Check for requisite .Renviron variables; alert if missing
 }
-\keyword{internal}
+\examples{
+checkRenviron("API_KEY")
+}
