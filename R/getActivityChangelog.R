@@ -21,7 +21,8 @@ getActivityChangelog <- Vectorize(function(activityId, activities="") {
   r.parsed <- content(r, "parsed", "application/json") 
   changelog <- lapply(r.parsed$activityChangelogs, data.frame, stringsAsFactors = FALSE) %>% 
     bind_rows %>% 
-    mutate(name=activities$name[activities$id == activityId]) 
+    mutate(name=activities$name[activities$id == activityId],
+           type=activities$type[activities$id == activityId]) 
   return(as.data.frame(changelog))
 }, "activityId", SIMPLIFY=FALSE)
 
