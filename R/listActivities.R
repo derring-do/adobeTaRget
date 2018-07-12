@@ -15,12 +15,6 @@ listActivities <- function() {
                        "X-Api-Key" = Sys.getenv("ADOBEIO_API_KEY")
            )
   )
-  r <- GET(url = paste0("https://mc.adobe.io/", Sys.getenv("ADOBE_TENANT_NAME"), "/target/activities"),
-           add_headers("Authorization" = "12345",
-                       "Content-Type" = "application/vnd.adobe.target.v1+json",
-                       "X-Api-Key" = Sys.getenv("ADOBEIO_API_KEY")
-           )
-  )
   if(r$status_code == 200) {
     activities <- content(r, "parsed", "application/json") 
     activities <- lapply(activities$activities, data.frame, stringsAsFactors = FALSE) %>% bind_rows %>% arrange(desc(modifiedAt)) 
