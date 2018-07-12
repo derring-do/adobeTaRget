@@ -49,7 +49,7 @@ extractChangelogTiming <- function(changelog) {
     changelog %>%   
       mutate(status = paste0(activityParameters.state.previousValue, "-", activityParameters.state.changedValue)) %>%
       filter(status != "NA-NA") %>%
-      select(modifiedAt, status, name)
+      select(modifiedAt, scheduledStart, scheduledEnd, status, name)
   }
 }
 
