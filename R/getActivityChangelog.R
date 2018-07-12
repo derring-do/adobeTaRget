@@ -1,5 +1,5 @@
 #' getActivityChangelog
-#'
+#' Wrapper for Get Activity Changelog API call
 #' @param activityId (character) activityId returned by listActivities()
 #' @param activities output of listActivities
 #'
@@ -23,10 +23,11 @@ getActivityChangelog <- Vectorize(function(activityId, activities="") {
     r.parsed <- content(r, "parsed", "application/json") 
     changelog <- lapply(r.parsed$activityChangelogs, data.frame, stringsAsFactors = FALSE) %>% 
       bind_rows %>% 
-      mutate(name=activities$name[activities$id == activityId],
+      mutate(id=activityId,
+             name=activities$name[activities$id == activityId],
              type=activities$type[activities$id == activityId],
-             scheduledStart=activities$startsAt[activities$id == activityId],
-             scheduledEnd=activities$endsAt[activities$id == activityId]) 
+             startsAt=activities$startsAt[activities$id == activityId],
+             endsAt=activities$endsAt[activities$id == activityId]) 
     return(as.data.frame(changelog))
   } else {
     stop(r)
@@ -49,7 +50,7 @@ extractChangelogTiming <- function(changelog) {
     changelog %>%   
       mutate(status = paste0(activityParameters.state.previousValue, "-", activityParameters.state.changedValue)) %>%
       filter(status != "NA-NA") %>%
-      select(modifiedAt, scheduledStart, scheduledEnd, status, name)
+      select(modifiedAt, startsAt, endsAt, status, name, type, id)
   }
 }
 

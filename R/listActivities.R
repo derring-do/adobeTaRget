@@ -1,5 +1,5 @@
 #' listActivities
-#'
+#' Wrapper for List Activities API call (http://developers.adobetarget.com/api/#list-activities)
 #' @return data.frame of all activities
 #' @export
 #' @import httr dplyr
