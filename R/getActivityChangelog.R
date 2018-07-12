@@ -13,17 +13,24 @@ getActivityChangelog <- Vectorize(function(activityId, activities="") {
   checkRenviron("ADOBE_BEARER_TOKEN")
   checkRenviron("ADOBEIO_API_KEY")
   r <- GET(url = paste0("https://mc.adobe.io/", Sys.getenv("ADOBE_TENANT_NAME"), "/target/activities/", activityId, "/changelog"),
-           add_headers("Authorization" = paste("Bearer", Sys.getenv("ADOBE_BEARER_TOKEN")),
+           add_headers("Authorization" = Sys.getenv("ADOBE_BEARER_TOKEN"),
                        "Content-Type" = "application/vnd.adobe.target.v1+json",
                        "X-Api-Key" = Sys.getenv("ADOBEIO_API_KEY")
            )
   )
-  r.parsed <- content(r, "parsed", "application/json") 
-  changelog <- lapply(r.parsed$activityChangelogs, data.frame, stringsAsFactors = FALSE) %>% 
-    bind_rows %>% 
-    mutate(name=activities$name[activities$id == activityId],
-           type=activities$type[activities$id == activityId]) 
-  return(as.data.frame(changelog))
+  
+  if(r$status_code == 200) {
+    r.parsed <- content(r, "parsed", "application/json") 
+    changelog <- lapply(r.parsed$activityChangelogs, data.frame, stringsAsFactors = FALSE) %>% 
+      bind_rows %>% 
+      mutate(name=activities$name[activities$id == activityId],
+             type=activities$type[activities$id == activityId],
+             scheduledStart=activities$startsAt[activities$id == activityId],
+             scheduledEnd=activities$endsAt[activities$id == activityId]) 
+    return(as.data.frame(changelog))
+  } else {
+    stop(r)
+  }
 }, "activityId", SIMPLIFY=FALSE)
 
 #' Extract start-/stop-related details from getActivityChangelog() output
