@@ -2,7 +2,8 @@
 % Please edit documentation in R/getActivityChangelog.R
 \name{getActivityChangelog}
 \alias{getActivityChangelog}
-\title{getActivityChangelog}
+\title{getActivityChangelog
+Wrapper for Get Activity Changelog API call}
 \usage{
 getActivityChangelog(activityId, activities = "")
 }
@@ -16,6 +17,7 @@ data.frame of a single activity's events
 }
 \description{
 getActivityChangelog
+Wrapper for Get Activity Changelog API call
 }
 \examples{
 getActivityChangelog("123456"); if only one supplied, you get a list instead of df

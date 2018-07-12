@@ -2,7 +2,8 @@
 % Please edit documentation in R/listActivities.R
 \name{listActivities}
 \alias{listActivities}
-\title{listActivities}
+\title{listActivities
+Wrapper for List Activities API call (http://developers.adobetarget.com/api/#list-activities)}
 \usage{
 listActivities()
 }
@@ -11,6 +12,7 @@ data.frame of all activities
 }
 \description{
 listActivities
+Wrapper for List Activities API call (http://developers.adobetarget.com/api/#list-activities)
 }
 \examples{
 listActivities()
