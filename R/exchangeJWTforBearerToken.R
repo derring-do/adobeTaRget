@@ -5,7 +5,7 @@
 #' @export
 #' @import httr 
 #'
-#' @examples
+#' @examples exchangeJWTforBearerToken()
 exchangeJWTforBearerToken <- function() {
   checkRenviron("ADOBE_TENANT_NAME")
   checkRenviron("ADOBEIO_API_KEY")
@@ -17,7 +17,7 @@ exchangeJWTforBearerToken <- function() {
                         )
             )
   if(r$status_code == 200) {
-    Sys.setenv(ADOBEIO_BEARER_TOKEN=content(r)$access_token)
+    Sys.setenv(ADOBEIO_BEARER_TOKEN=paste0("Bearer ", content(r)$access_token))
     message("ADOBEIO_BEARER_TOKEN set for current R session")
   } else {
     stop(r)
