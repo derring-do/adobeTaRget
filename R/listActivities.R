@@ -24,6 +24,16 @@ listActivities <- function() {
   }
 }
 
+#' Get AB Performance Report
+#' Wrapper for Get AB Performance Report API call 
+#'
+#' @param activityId 
+#'
+#' @return json
+#' @export
+#' @import httr dplyr
+#'
+#' @examples getAbPerformanceReport("12345")
 getAbPerformanceReport <- function(activityId) {
   checkRenviron("ADOBE_TENANT_NAME")
   checkRenviron("ADOBEIO_API_KEY")

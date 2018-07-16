@@ -3,6 +3,7 @@
 export(checkRenviron)
 export(exchangeJWTforBearerToken)
 export(extractChangelogTiming)
+export(getAbPerformanceReport)
 export(getActivityChangelog)
 export(listActivities)
 export(scrapeAdobeNotifications)
