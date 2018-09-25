@@ -5,8 +5,8 @@
 \title{[DEPRECATED] Scrape Adobe Experience Cloud notification feed for start and complete times}
 \usage{
 scrapeAdobeNotifications(useDocker = TRUE,
-  feed_scraper_js = dir(path.package("adobeTaRget"), pattern = "feed2.js",
-  full.names = TRUE))
+  feed_scraper_js = dir(path.package("adobeTaRget"), pattern =
+  "feed2.js", full.names = TRUE))
 }
 \arguments{
 \item{useDocker}{boolean}

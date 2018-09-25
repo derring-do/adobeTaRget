@@ -5,7 +5,7 @@
 \title{Exchange JWT for Bearer token (POST)
 Wrapper for Adobe IO API call}
 \usage{
-exchangeJWTforBearerToken()
+exchangeJWTforBearerToken(path.to.config, path.to.pem)
 }
 \value{
 Bearer token that works for 24 hours and is to be used in all the Target API calls
@@ -15,5 +15,5 @@ Exchange JWT for Bearer token (POST)
 Wrapper for Adobe IO API call
 }
 \examples{
-exchangeJWTforBearerToken()
+exchangeJWTforBearerToken("C://users/amanda.ludden//usermanagement.config", "C://users/amanda.ludden/secret.pem")
 }
