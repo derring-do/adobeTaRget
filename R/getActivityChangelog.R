@@ -27,7 +27,8 @@ getActivityChangelog <- Vectorize(function(activityId, activities="") {
              name=activities$name[activities$id == activityId],
              type=activities$type[activities$id == activityId],
              startsAt=activities$startsAt[activities$id == activityId],
-             endsAt=activities$endsAt[activities$id == activityId]) 
+             endsAt=activities$endsAt[activities$id == activityId]
+             ) 
     return(as.data.frame(changelog))
   } else {
     stop(r)
