@@ -21,6 +21,7 @@ getActivityChangelog <- Vectorize(function(activityId, activities="") {
   
   if(r$status_code == 200) {
     r.parsed <- content(r, "parsed", "application/json") 
+
     changelog <- lapply(r.parsed$activityChangelogs, data.frame, stringsAsFactors = FALSE) %>% 
       bind_rows %>% 
       mutate(id=activityId,
