@@ -10,4 +10,7 @@ exchangeJWTforBearerToken <- function(path.to.config = Sys.getenv("ADOBEIO_CONFI
   reticulate::py_run_file(dir(path.package("adobeTaRget"), "ExchangeJWT", full.names=TRUE))  # source function
   py$ExchangeJWT(path.to.config, path.to.pem)
   Sys.setenv("ADOBEIO_BEARER_TOKEN" = paste0("Bearer " , ini::read.ini(path.to.config)$enterprise$access_token))
-}
+  if( !is.null(Sys.getenv("ADOBEIO_BEARER_TOKEN")) ) {
+    message("ADOBEIO_BEARER_TOKEN set")
+  }
+  }
