@@ -5,13 +5,9 @@
 #' @export
 #' @import reticulate 
 #'
-#' @examples exchangeJWTforBearerToken("C://users/amanda.ludden//usermanagement.config", "C://users/amanda.ludden/secret.pem")
-exchangeJWTforBearerToken <- function(path.to.config, path.to.pem) {
+#' @examples exchangeJWTforBearerToken()
+exchangeJWTforBearerToken <- function(path.to.config = Sys.getenv("ADOBEIO_CONFIG_PATH"), path.to.pem = Sys.getenv("ADOBEIO_PEM_PATH")) {
   reticulate::py_run_file(dir(path.package("adobeTaRget"), "ExchangeJWT", full.names=TRUE))  # source function
   py$ExchangeJWT(path.to.config, path.to.pem)
   Sys.setenv("ADOBEIO_BEARER_TOKEN" = paste0("Bearer " , ini::read.ini(path.to.config)$enterprise$access_token))
 }
-
-
-
-

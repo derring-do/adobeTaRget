@@ -4,7 +4,9 @@
 #' @export
 #' @import httr dplyr
 #'
-#' @examples listActivities()
+#' @examples 
+#' exchangeJWT
+#' listActivities()
 listActivities <- function() {
   checkRenviron("ADOBE_TENANT_NAME")
   checkRenviron("ADOBEIO_API_KEY")
