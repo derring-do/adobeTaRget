@@ -1,9 +1,10 @@
 #' Get AB Performance Report
-#' Wrapper for Get AB Performance Report API call 
-#'
+#' @description 
+#' Retrieve the performance report data for the AB activity referenced by the provided id.
+#' \url{https://developers.adobetarget.com/api/#get-ab-performance-report}
 #' @param activityId 
 #'
-#' @return json
+#' @return json; see \href{https://developers.adobetarget.com/api/#get-ab-performance-report}{Sample Response}
 #' @export
 #' @import httr dplyr
 #'
