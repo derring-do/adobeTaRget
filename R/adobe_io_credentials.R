@@ -14,7 +14,7 @@ checkRenviron <- function(var) {
 }
 
 #' Install Adobe IO credentials in a .config file and .Renviron for repeated use
-#'
+#' ripped from ropensci/Qualtrics pkg (will cite properly)
 #' @param ims_host 
 #' @param ims_endpoint_jwt 
 #' @param org_id 
@@ -64,7 +64,7 @@ set_adobe_io_credentials <- function(ims_host,
                                  install=FALSE
                                  ) {
     argsList <- as.list(match.call())[-1]
-    argsList <<- argsList[which(!grepl("adobe_io_credentials|overwrite|install", names(argsList)))]
+    argsList <- argsList[which(!grepl("adobe_io_credentials|overwrite|install", names(argsList)))]
     names(argsList) <- paste0("adobe_io_", names(argsList))
   
     if (install) {
