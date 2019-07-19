@@ -1,6 +1,6 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "adobeTaRget"
+author: "derring-do"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,57 +9,51 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+## Prerequisites
+
+<details><summary>Adobe IO API Configuration</summary>
+
+1. Get System Admin rights for Adobe IO
+
+1. Generate public certificate and private key per this [guide](https://helpx.adobe.com/in/marketing-cloud-core/kb/adobe-io-authentication-step-by-step.html):
+    - Generate `secret.pem` and `certificate.pem` via:         
+    ```bash
+    openssl req -nodes -text -x509 -newkey rsa:2048 -keyout secret.pem -out certificate.pem -days 356
+    ```
+
+    - Convert `secret.key` to `secret.pem` via: 
+
+    ```bash
+    openssl pkcs8 -topk8 -inform PEM -outform DER -in secret.pem -nocrypt > secret.key
+    ```
+1. Set up New Integration in Adobe IO: Go to https://console.adobe.io > "New Integration" > "Access and API" > select Adobe Solution (Target) > Enter Integration details > Upload `certificate.pem`
+
+1. Use adobeTaRget::set_adobe_io_credentials() to set credentials, or manually populate .Renviron with the following from the IO Console and the directory where you saved secret.pem:
+
+    ```
+    adobe_io_ims_host = ims-na1.adobelogin.com
+    adobe_io_ims_endpoint_jwt = /ims/exchange/jwt
+    adobe_io_org_id = xxx@AdobeOrg
+    adobe_io_api_key = xxx
+    adobe_io_client_secret = xxx
+    adobe_io_tech_acct_id = xxx@techacct.adobe.com
+    adobe_io_priv_key_filename = xxx/secret.pem
+    ```
+
+</details>
+<br>
+
+```{r, echo=TRUE}
+library(adobeTaRget)
+exchangeJWTforBearerToken()
+
+# List Activities
+activities <- listActivities() %>% filter(grepl("test", name)) %>% select(-thirdPartyId)
+activities
+
+# Get AB Performance Report
+getAbPerformanceReport("246022")
+
+# View Changelog
+getActivityChangelog("246022", activities)
 ```
-
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
-
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
