@@ -1,4 +1,4 @@
-# adobeTaRget
+# adobeTaRget (WIP)
 Wrapper functions for selected Adobe Target APIs
 https://developers.adobetarget.com/api/#introduction
 

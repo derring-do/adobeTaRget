@@ -49,3 +49,36 @@ getOfferById <- function(offerId) {
     stop(r)
   }
 }
+
+#' Update Offer by ID
+#' @description 
+#' Updates the content offer referenced by the id specified in the URL.
+#' \url{https://developers.adobetarget.com/api/#update-offer-by-id}
+#' @param offerId 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' updateOfferById(offerId="535745", offerName="asdf", updatedContent="<b>asdf</b>")
+
+updateOfferById <- function(offerId, offerName, updatedContent, api.version = "v2") {
+  checkRenviron("ADOBE_TENANT_NAME")
+  checkRenviron("ADOBEIO_API_KEY")
+  checkRenviron("ADOBEIO_BEARER_TOKEN")
+  
+  r <- httr::PUT(url = glue::glue("https://mc.adobe.io/{yourtenantname}/target/offers/content/{offerId}",
+                                  yourtenantname = Sys.getenv("ADOBE_TENANT_NAME"),
+                                  offerId = offerId),
+                 config = c(adobe_target_api_headers(api.version=api.version),
+                            content_type(paste0("application/vnd.adobe.target.", api.version, "+json"))
+                 ),
+                 body = jsonlite::toJSON(list(name=offerName, content=updatedContent), auto_unbox = TRUE)
+  )
+  if(r$status_code == 200) {
+    report <- content(r, as="text", type="application/json") %>% jsonlite::fromJSON(simplifyVector = FALSE)
+    return(report) 
+  } else {
+    stop(r)
+  }
+}
