@@ -91,7 +91,7 @@ activities
     ## 1   <NA>
 
 ``` r
-# Get AB Performance Report
+# Get AB Performance Report (using Adobe Target API)
 getAbPerformanceReport(activityId)
 ```
 
@@ -412,6 +412,50 @@ getAbPerformanceReport(activityId)
     ## [1] 0
 
 ``` r
+# Get report for more metrics and breakdowns using RSiteCatalyst under the hood
+library(RSiteCatalyst)
+```
+
+    ## Warning: package 'RSiteCatalyst' was built under R version 3.4.4
+
+``` r
+RSiteCatalyst::SCAuth(key = Sys.getenv("SCAUTH_KEY"), secret = Sys.getenv("SCAUTH_SECRET"), company = Sys.getenv("SCAUTH_CO"))
+```
+
+    ## [1] "Credentials Saved in RSiteCatalyst Namespace."
+
+``` r
+adobeTaRget::QueueA4TReport(activityId = "298487") %>%
+  mutate(activity = "AB",
+         experience = c("A", "B"),
+         uniquevisitors = c(12345, 54321)
+         ) 
+```
+
+    ## No encoding supplied: defaulting to UTF-8.
+
+    ## No encoding supplied: defaulting to UTF-8.
+    ## No encoding supplied: defaulting to UTF-8.
+    ## No encoding supplied: defaulting to UTF-8.
+
+    ## [1] "Requesting URL attempt #1"
+    ## [1] "Requesting URL attempt #2"
+    ## [1] "Received trended report."
+
+    ## Warning in is.na(elements[i, ]$classification): is.na() applied to non-
+    ## (list or vector) of type 'NULL'
+
+    ## Warning in is.na(elements[i, ]$classification): is.na() applied to non-
+    ## (list or vector) of type 'NULL'
+
+    ##     datetime activity experience uniquevisitors segment.id segment.name
+    ## 1 2019-07-19       AB          A          12345                        
+    ## 2 2019-07-19       AB          B          54321                        
+    ##   activity_duration           activity_range activityId
+    ## 1                20 2019-07-19 to 2019-08-08     298487
+    ## 2                20 2019-07-19 to 2019-08-08     298487
+
+``` r
 # View Changelog
 getActivityChangelog(activityId, activities)
 ```
@@ -450,7 +494,14 @@ getAbReportInterval(activityId)
 
     ## No encoding supplied: defaulting to UTF-8.
 
-    ## [1] "2019-06-25T15:00Z/2019-07-09T19:00Z"
+    ## $start
+    ## [1] "2019-06-25"
+    ## 
+    ## $end
+    ## [1] "2019-07-09"
+    ## 
+    ## $length
+    ## [1] 14
 
 ### Get and modify offer info
 
@@ -483,7 +534,7 @@ getOfferById(offers[2])
     ## [1] "<b>new content</b>"
     ## 
     ## $modifiedAt
-    ## [1] "2019-08-08T18:43:25Z"
+    ## [1] "2019-08-08T20:27:27Z"
 
 ``` r
 updateOfferById(offers[2], names(offers[2]), "<b>new content</b>")
@@ -501,4 +552,4 @@ updateOfferById(offers[2], names(offers[2]), "<b>new content</b>")
     ## [1] "<b>new content</b>"
     ## 
     ## $modifiedAt
-    ## [1] "2019-08-08T18:45:05Z"
+    ## [1] "2019-08-08T20:30:38Z"

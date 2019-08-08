@@ -59,8 +59,17 @@ activityId <- activities$id
 # start = manual start datetime; startsAt = scheduled start
 activities
 
-# Get AB Performance Report
+# Get AB Performance Report (using Adobe Target API)
 getAbPerformanceReport(activityId)
+
+# Get report for more metrics and breakdowns using RSiteCatalyst under the hood
+library(RSiteCatalyst)
+RSiteCatalyst::SCAuth(key = Sys.getenv("SCAUTH_KEY"), secret = Sys.getenv("SCAUTH_SECRET"), company = Sys.getenv("SCAUTH_CO"))
+adobeTaRget::QueueA4TReport(activityId = "298487") %>%
+  mutate(activity = "AB",
+         experience = c("A", "B"),
+         uniquevisitors = c(12345, 54321)
+         ) 
 
 # View Changelog
 getActivityChangelog(activityId, activities)
