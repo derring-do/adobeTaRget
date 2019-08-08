@@ -2,7 +2,8 @@
 title: "adobeTaRget"
 author: "derring-do"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+# output: rmarkdown::html_vignette
+output: github_document
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -45,20 +46,36 @@ vignette: >
 
 ## Usage
 
+### Get stats and paradata for activities
 ```{r, echo=TRUE}
 library(adobeTaRget)
 library(dplyr)
 exchangeJWTforBearerToken()
 
 # List Activities
-activities <- listActivities() %>% filter(grepl("test", name)) %>% select(-thirdPartyId)
+activities <- listActivities() %>% filter(grepl("AA Test", name)) %>% select(-thirdPartyId)
+activityId <- activities$id
 
 # start = manual start datetime; startsAt = scheduled start
 activities
 
 # Get AB Performance Report
-getAbPerformanceReport("246022")
+getAbPerformanceReport(activityId)
 
 # View Changelog
-getActivityChangelog("246022", activities)
+getActivityChangelog(activityId, activities)
+
+# Get AB Report Interval
+getAbReportInterval(activityId)
+```
+
+### Get and modify offer info
+```{r, echo=TRUE}
+
+offers <- sapply(getAbActivityById("301540")$options, function(x) {setNames(x$offerId, x$name)})
+offers
+
+getOfferById(offers[2]) 
+
+updateOfferById(offers[2], names(offers[2]), "<b>new content</b>")
 ```
