@@ -66,12 +66,13 @@ getAbActivityById <- function(activityId) {
 #' @export
 #'
 #' @examples
+#' getAbReportInterval("224920")
 getAbReportInterval <- function(activityId) {
   reportInterval <- adobeTaRget::getAbPerformanceReport(activityId)$reportParameters$reportInterval
   test_start  <- reportInterval %>% strsplit("/") %>% unlist %>% first %>% as.Date()
   test_end    <- reportInterval %>% strsplit("/") %>% unlist %>% last %>% as.Date()
-  list(start = test_start, end = test_end, length = as.numeric(test_end-test_start))
-  return(reportInterval)
+  ri <- list(start = test_start, end = test_end, length = as.numeric(test_end-test_start))
+  return(ri)
 }
 
 
