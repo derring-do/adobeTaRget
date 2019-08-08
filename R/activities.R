@@ -55,6 +55,26 @@ getAbActivityById <- function(activityId) {
   }
 }
 
+#' Get AB Report Interval from Adobe Target getAbPerformanceReport()
+#' @description 
+#' Wrapper for getAbPerformanceReport adobeTaRget/Adobe Target API call (specifically reportInterval value)
+#' Calculates duration for later
+#'
+#' @param activityId
+#'
+#' @return
+#' @export
+#'
+#' @examples
+getAbReportInterval <- function(activityId) {
+  reportInterval <- adobeTaRget::getAbPerformanceReport(activityId)$reportParameters$reportInterval
+  test_start  <- reportInterval %>% strsplit("/") %>% unlist %>% first %>% as.Date()
+  test_end    <- reportInterval %>% strsplit("/") %>% unlist %>% last %>% as.Date()
+  list(start = test_start, end = test_end, length = as.numeric(test_end-test_start))
+  return(reportInterval)
+}
+
+
 #' Get Activity Changelog
 #' @description 
 #' Returns the changelog for a given activity id.
