@@ -2,7 +2,8 @@
 % Please edit documentation in R/adobe_io_credentials.R
 \name{set_adobe_io_credentials}
 \alias{set_adobe_io_credentials}
-\title{Install Adobe IO credentials in a .config file and .Renviron for repeated use}
+\title{Install Adobe IO credentials in a .config file and .Renviron for repeated use
+ripped from ropensci/Qualtrics pkg (will cite properly)}
 \usage{
 set_adobe_io_credentials(ims_host, ims_endpoint_jwt, org_id, api_key,
   client_secret, tech_acct_id, priv_key_filename, ADOBE_TENANT_NAME,
@@ -29,6 +30,7 @@ set_adobe_io_credentials(ims_host, ims_endpoint_jwt, org_id, api_key,
 }
 \description{
 Install Adobe IO credentials in a .config file and .Renviron for repeated use
+ripped from ropensci/Qualtrics pkg (will cite properly)
 }
 \examples{
 set_adobe_io_credentials(ims_host = "xxx", 
