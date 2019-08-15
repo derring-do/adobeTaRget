@@ -13,3 +13,6 @@ getAbReportInterval(activityId)
 Wrapper for getAbPerformanceReport adobeTaRget/Adobe Target API call (specifically reportInterval value)
 Calculates duration for later
 }
+\examples{
+getAbReportInterval("224920")
+}
