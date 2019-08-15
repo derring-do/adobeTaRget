@@ -125,6 +125,8 @@ make_exchange_jwt_config <- function() {
   Sys.setenv("ADOBEIO_CONFIG_PATH"=normalizePath(configFile, winslash = "/"))
 }
 
+
+
 #' Exchange JWT for Bearer token (POST)
 #' Wrapper for Adobe IO API call
 #' Writes Bearer token to the config file; write bearer token to renviron
@@ -133,7 +135,7 @@ make_exchange_jwt_config <- function() {
 #'
 #' @return Bearer token that works for 24 hours needed for all Target API calls
 #' @export
-#' @import reticulate ini
+#' @import ini
 #'
 #' @examples exchangeJWTforBearerToken()
 exchangeJWTforBearerToken <- function(
