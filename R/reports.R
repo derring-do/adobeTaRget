@@ -16,7 +16,7 @@ getAbPerformanceReport <- function(activityId, encoding = "UTF-8") {
   r <- httr::GET(url = glue::glue("https://mc.adobe.io/{yourtenantname}/target/activities/ab/{activityId}/report/performance", 
                                   yourtenantname = Sys.getenv("ADOBE_TENANT_NAME"), 
                                   activityId = activityId), 
-                 add_headers("Authorization" = Sys.getenv("ADOBEIO_BEARER_TOKEN"),
+                 add_headers("Authorization"=  Sys.getenv("ADOBEIO_BEARER_TOKEN"),
                              "Content-Type" = "application/vnd.adobe.target.v1+json",
                              "X-Api-Key" = Sys.getenv("ADOBEIO_API_KEY")
                  )

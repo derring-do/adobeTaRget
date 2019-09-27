@@ -9,7 +9,7 @@
 #' @examples 
 #' exchangeJWT
 #' listActivities()
-listActivities <- function() {
+listActivities <- function(encoding = "UTF-8") {
   checkRenviron("ADOBE_TENANT_NAME")
   checkRenviron("ADOBEIO_API_KEY")
   checkRenviron("ADOBEIO_BEARER_TOKEN")
@@ -17,7 +17,7 @@ listActivities <- function() {
            adobe_target_api_headers()
   )
   if(r$status_code == 200) {
-    activities <- content(r, "parsed", "application/json") 
+    activities <- content(r, "parsed", "application/json", encoding = encoding) 
     activities <- lapply(activities$activities, data.frame, stringsAsFactors = FALSE) %>% bind_rows %>% arrange(desc(modifiedAt)) 
     return(activities) 
   } else {
@@ -38,7 +38,7 @@ listActivities <- function() {
 #'
 #' @examples 
 #' getAbActivityById("298487")
-getAbActivityById <- function(activityId) {
+getAbActivityById <- function(activityId, encoding = "UTF-8") {
   checkRenviron("ADOBE_TENANT_NAME")
   checkRenviron("ADOBEIO_API_KEY")
   checkRenviron("ADOBEIO_BEARER_TOKEN")
@@ -48,7 +48,7 @@ getAbActivityById <- function(activityId) {
                  adobe_target_api_headers()
   )
   if(r$status_code == 200) {
-    report <- content(r, as="text", type="application/json") %>% jsonlite::fromJSON(simplifyVector = FALSE)
+    report <- content(r, as="text", type="application/json", encoding = encoding) %>% jsonlite::fromJSON(simplifyVector = FALSE)
     return(report) 
   } else {
     stop(r)
@@ -89,7 +89,7 @@ getAbReportInterval <- function(activityId) {
 #'
 #' @examples 
 #' getActivityChangelog("298487", activities) # if only one supplied, you get a list instead of df
-getActivityChangelog <- Vectorize(function(activityId, activities) {
+getActivityChangelog <- Vectorize(function(activityId, activities, encoding = "UTF-8") {
   checkRenviron("ADOBE_TENANT_NAME")
   checkRenviron("ADOBEIO_API_KEY")
   checkRenviron("ADOBEIO_BEARER_TOKEN")
@@ -98,7 +98,7 @@ getActivityChangelog <- Vectorize(function(activityId, activities) {
   )
   
   if(r$status_code == 200) {
-    r.parsed <- content(r, "parsed", "application/json") 
+    r.parsed <- content(r, "parsed", "application/json", encoding = encoding) 
     
     changelog <- lapply(r.parsed$activityChangelogs, data.frame, stringsAsFactors = FALSE) %>% 
       bind_rows %>% 
