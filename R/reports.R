@@ -9,7 +9,7 @@
 #' @import httr dplyr
 #'
 #' @examples getAbPerformanceReport("12345")
-getAbPerformanceReport <- function(activityId) {
+getAbPerformanceReport <- function(activityId, encoding = "UTF-8") {
   checkRenviron("ADOBE_TENANT_NAME")
   checkRenviron("ADOBEIO_API_KEY")
   checkRenviron("ADOBEIO_BEARER_TOKEN")
@@ -22,7 +22,7 @@ getAbPerformanceReport <- function(activityId) {
                  )
   )
   if(r$status_code == 200) {
-    report <- content(r, as="text", type="application/json") %>% jsonlite::fromJSON(simplifyVector = FALSE)
+    report <- content(r, as="text", type="application/json", encoding) %>% jsonlite::fromJSON(simplifyVector = FALSE)
     return(report) 
   } else {
     stop(r)
