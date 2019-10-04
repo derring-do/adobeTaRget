@@ -4,7 +4,7 @@
 \alias{getAbPerformanceReport}
 \title{Get AB Performance Report}
 \usage{
-getAbPerformanceReport(activityId)
+getAbPerformanceReport(activityId, encoding = "UTF-8")
 }
 \arguments{
 \item{activityId}{}

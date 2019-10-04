@@ -30,7 +30,7 @@ Uses RSiteCatalyst::QueueTrended() to get metrics for an Adobe Target AB activit
 \examples{
 # Error if activity doesn't report to Adobe Analytics 
 \dontrun{
-QueueAbReport(activityId = "297037", reportMeta=FALSE)
+QueueA4TReport(activityId = "297037", reportMeta=FALSE)
 }
 
 QueueA4TReport(activityId = "298487", reportMeta=FALSE) # reports uniquevisitors by default

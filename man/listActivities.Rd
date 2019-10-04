@@ -4,7 +4,7 @@
 \alias{listActivities}
 \title{List Activities}
 \usage{
-listActivities()
+listActivities(encoding = "UTF-8")
 }
 \value{
 data.frame; see \href{https://developers.adobetarget.com/api/#list-activities}{Sample Response}

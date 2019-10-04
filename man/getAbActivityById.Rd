@@ -4,7 +4,7 @@
 \alias{getAbActivityById}
 \title{Get AB Activity by ID}
 \usage{
-getAbActivityById(activityId)
+getAbActivityById(activityId, encoding = "UTF-8")
 }
 \arguments{
 \item{activityId}{}

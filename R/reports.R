@@ -17,7 +17,7 @@ getAbPerformanceReport <- function(activityId, encoding = "UTF-8") {
                                   yourtenantname = Sys.getenv("ADOBE_TENANT_NAME"), 
                                   activityId = activityId), 
                  add_headers("Authorization"=  Sys.getenv("ADOBEIO_BEARER_TOKEN"),
-                             "Content-Type" = "application/vnd.adobe.target.v1+json",
+                             "Content-Type" = "application/vnd.adobe.target.v1+json", 
                              "X-Api-Key" = Sys.getenv("ADOBEIO_API_KEY")
                  )
   )

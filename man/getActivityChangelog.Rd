@@ -4,7 +4,7 @@
 \alias{getActivityChangelog}
 \title{Get Activity Changelog}
 \usage{
-getActivityChangelog(activityId, activities)
+getActivityChangelog(activityId, activities, encoding = "UTF-8")
 }
 \arguments{
 \item{activityId}{(character) activityId returned by \code{\link{listActivities}}}
