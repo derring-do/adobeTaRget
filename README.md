@@ -33,6 +33,7 @@ adobeTaRget
     or manually populate .Renviron with the following from the IO
     Console and the directory where you saved secret.pem:
     
+        ADOBE_TENANT_NAME = "xxx"
         adobe_io_ims_host = ims-na1.adobelogin.com
         adobe_io_ims_endpoint_jwt = /ims/exchange/jwt
         adobe_io_org_id = xxx@AdobeOrg
