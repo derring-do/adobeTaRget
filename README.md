@@ -40,8 +40,11 @@ adobeTaRget
         adobe_io_api_key = xxx
         adobe_io_client_secret = xxx
         adobe_io_tech_acct_id = xxx@techacct.adobe.com
-        adobe_io_priv_key_filename = xxx/secret.pem
-
+        adobe_io_priv_key_filename = "c://xxx/secret.pem"
+        adobe_io_ims_host = ims-na1.adobelogin.com
+        ADOBEIO_CONFIG_PATH = "c://xxx/usermanagement.config"
+        ADOBEIO_PEM_PATH = "c://xxx/secret.pem"
+        
 </details>
 
 <br>
