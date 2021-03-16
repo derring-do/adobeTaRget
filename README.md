@@ -1,6 +1,5 @@
 adobeTaRget
 ================
-derring-do
 2019-08-08
 
 ## Prerequisites
@@ -51,6 +50,7 @@ derring-do
 ### Get stats and paradata for activities
 
 ``` r
+devtools::install_github::("derring-do/adobeTaRget")
 library(adobeTaRget)
 library(dplyr)
 ```
